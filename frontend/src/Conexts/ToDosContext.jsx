@@ -157,7 +157,7 @@ export const MyTaskContextProvider = ({children}) => {
 
 
   // to send todo create req
-  const createNewToDo = async (user_id, title, due_date, priority, is_type_project) => {
+  const createNewToDo = async (user_id, title, due_date, priority, is_type_project, assignee_id) => {
 
 
     console.log("inside the context", due_date);
@@ -165,7 +165,7 @@ export const MyTaskContextProvider = ({children}) => {
 
     try {
       const res = await axios.post(`${API_URL}todo/create-todo`, {
-        user_id, title, due_date, priority, is_type_project
+        user_id, title, due_date, priority, is_type_project, assignee_id
       })
 
       if (res){

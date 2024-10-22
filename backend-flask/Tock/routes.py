@@ -248,7 +248,7 @@ def createToDo():
 
     try:
 
-        new_todo = Tasks(title=data.get('title'), is_type_project=data.get('is_type_project'), priority=data.get('priority'), due_date=due_date_obj, user_id=data.get('user_id'))
+        new_todo = Tasks(title=data.get('title'), is_type_project=data.get('is_type_project'), priority=data.get('priority'), due_date=due_date_obj, user_id=data.get('user_id'), assignee_id=data.get('assignee_id'))
 
         with app.app_context():
             db.session.add(new_todo)
@@ -274,6 +274,7 @@ def getAllToDo():
     try:
         allToDo = Tasks.query.filter_by(user_id=data.get('user_id')).all()
 
+        allToDo = Tasks.query.filter(or_(Tasks.user_id == data.get('user_id'), Tasks.assignee_id == data.get('user_id') ))
 
         todo_list = []
 
@@ -285,7 +286,9 @@ def getAllToDo():
                 'status': todo.status,
                 'due_date': todo.due_date,
                 'assignee_id': todo.assignee_id,
-                'priority': todo.priority
+                'priority': todo.priority,
+                'user_id': todo.user_id,
+                'project_id': todo.project_id,
             })
 
     

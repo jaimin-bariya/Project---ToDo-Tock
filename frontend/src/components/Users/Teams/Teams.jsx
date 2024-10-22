@@ -4,23 +4,56 @@ import { FiStar, FiTag, FiTrash, FiInbox } from "react-icons/fi";
 
 import { TeamContext, AuthContext } from "../../../Conexts/Contexts";
 
-import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { all } from "axios";
+
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 // components/Inbox.jsx
 const Teams = () => {
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { userId } = useContext(AuthContext);
-  const { allTeams, isTeamUpdated, SetTeamUpdated, getAllTeams, isTeamChanged, setTeamChanged, currentTeam, setCurrentTeam, giveMeTeamMembers } = useContext(TeamContext);
+  const {
+    allTeams,
+    isTeamUpdated,
+    SetTeamUpdated,
+    getAllTeams,
+    isTeamChanged,
+    setTeamChanged,
+    currentTeam,
+    setCurrentTeam,
+    giveMeTeamMembers,
+  } = useContext(TeamContext);
 
-
-  const {teamId, teamTitle} = useParams()
+  const { teamId, teamTitle } = useParams();
 
   console.log("current id", teamId);
   console.log("current id", teamTitle);
-  
 
   useEffect(() => {
     try {
@@ -35,21 +68,26 @@ const Teams = () => {
     }
   }, [isTeamUpdated]);
 
-
-
   const handleSelecteTeam = async (team) => {
-
-    navigate(`/${userId}/teams/${team.id}/${team.name}`)
+    navigate(`/${userId}/teams/${team.id}/${team.name}`);
     // alert(`team is ${team.id}`);
     console.log("mmmm", team.id);
-    
-    await giveMeTeamMembers(team.id)
 
-    setTeamChanged(prev => !prev)
-    
+    await giveMeTeamMembers(team.id);
+
+    setTeamChanged((prev) => !prev);
+
     // alert("hi")
-    
+  };
+
+
+
+  const handleRemoveTeam = (team) => {
+
+    alert(`delete team id ${team.id}`)
+
   }
+
 
   return (
     <>
@@ -73,18 +111,50 @@ const Teams = () => {
                   //   <FiInbox className="mr-2 " /> <span className="whitespace-nowrap">{team.name}</span>
                   // </li>
 
-                  <li key={team.id}
-                    
-                      onClick={() => handleSelecteTeam(team)}
-                      className={`flex items-center p-2 mb-1 rounded transition-colors duration-300 ${
-                        location.pathname === `/${userId}/inbox`
-                          ? "bg-blue-100 text-blue-600"
-                          : "hover:bg-gray-200"
-                      }`}
-                    >
-                      <FiInbox className="mr-2" /> <span>{team.name}</span>
-                    
-                  </li>
+                  <ContextMenu key={team.id}>
+                    <ContextMenuTrigger>
+                      {" "}
+                      <li
+                        key={team.id}
+                        onClick={() => handleSelecteTeam(team)}
+                        className={`flex items-center p-2 mb-1 rounded transition-colors duration-300 hover:cursor-pointer ${
+                          location.pathname === `/${userId}/inbox`
+                            ? "bg-blue-100 text-blue-600"
+                            : "hover:bg-gray-200"
+                        }`}
+                      >
+                        <FiInbox className="mr-2" /> <span>{team.name}</span>
+                      </li>
+                    </ContextMenuTrigger>
+                    <ContextMenuContent>
+                      <ContextMenuItem onClick={() => navigator.clipboard.writeText(team.name)}>Copy team name</ContextMenuItem>
+                      <ContextMenuItem>Status</ContextMenuItem>
+
+                      
+                      
+                        <AlertDialog>
+                          <AlertDialogTrigger className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-100 w-full">Remove</AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                Are you absolutely sure?
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will
+                                permanently delete your team and remove your
+                                data from our servers.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction onClick={() => handleRemoveTeam(team)}>Remove</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      
+                      {/* <ContextMenuItem></ContextMenuItem> */}
+                    </ContextMenuContent>
+                  </ContextMenu>
                 ))}
               </ul>
             </div>
@@ -94,11 +164,7 @@ const Teams = () => {
               <h3 className="text-xl font-bold mb-2 "> In which I'm TM </h3>
               <hr />
 
-              <ul>
-
-              </ul>
-
-
+              <ul></ul>
             </div>
 
             <div className="grid grid-cols-2 gap-2">
@@ -112,19 +178,8 @@ const Teams = () => {
             </div>
           </div>
 
-
-
-          
-
-          <Outlet/>
-          
-          
-
+          <Outlet />
         </div>
-
-
-        
-
       </div>
     </>
   );

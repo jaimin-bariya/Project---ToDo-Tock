@@ -2,6 +2,8 @@
 // export { default as Emails } from "./InboxContext";
 
 
+export {HomeContext, MyHomeContext} from './HomeContext'
+
 // Context Providers
 export {MyInboxContentProvider} from './InboxContext'
 export {MyDocsContextProvider} from './DocsContext'

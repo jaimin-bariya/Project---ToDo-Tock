@@ -1,7 +1,17 @@
 import {AssignedTask, Greeting, TopBarHome} from '../../index'
 import {RecentMsg, RecentDocs, ProjectUpdates, CurrentGoal, YourTodaysTask} from '../../index'
+import { useContext, useEffect } from 'react';
+
+import {TaskContext} from '../../../Conexts/Contexts'
 
 const HomeContent = () => {
+
+
+
+  const {getAllToDos, isTaskUpdated} = useContext(TaskContext)
+
+
+
     return (
       <>
 

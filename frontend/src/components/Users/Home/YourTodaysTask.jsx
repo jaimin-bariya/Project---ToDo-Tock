@@ -26,7 +26,7 @@ const YourTodaysTask = () => {
 
       <div className="max-h-80 min-h-64 overflow-y-auto ">
         {allTasks
-        .filter((task) => new Date(task.due_date).getDate() === new Date().getDate())
+        .filter((task) => new Date(task.due_date).getDate() === new Date().getDate() && task.assignee_id === null)
         .map((task) => (
           <Task
             key={task.id}

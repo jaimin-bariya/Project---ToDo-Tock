@@ -24,6 +24,9 @@ import {
 export function DataTable({ columns, data }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
 
+  console.log("ddd", data);
+  
+
   const table = useReactTable({
     data,
     columns,

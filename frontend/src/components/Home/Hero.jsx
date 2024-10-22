@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
+import { useContext } from "react";
+import {HomeContext} from '../../Conexts/Contexts'
 
 // icons and imgs
 // import DashBoardIcon from "../../assets/icons/Home/dashboard.gif"; 
 
 
 import { DashBoardIcon, TimeTrackIcon, GoalIcon, DocsIcon, ProjectIcon } from "../../assets/imgs";
+import { Home } from "lucide-react";
 
 
-const Hero = ({openModal}) => {
+const Hero = () => {
+
+
+  const {openModal} = useContext(HomeContext)
 
 
 

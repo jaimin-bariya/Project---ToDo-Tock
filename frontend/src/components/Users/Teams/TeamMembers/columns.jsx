@@ -1,8 +1,10 @@
 "use client"
 import { MoreHorizontal } from "lucide-react"
-
+import {AdderTask} from '../../../index'
 
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +13,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+
+import { cn } from "@/lib/utils"
+
+
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
 
 // This defines the shape of our data.
 const data = [
@@ -64,7 +81,7 @@ export const columns = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
+      const members = row.original
  
       return (
         <DropdownMenu>
@@ -77,13 +94,50 @@ export const columns = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.username)}
+              onClick={() => navigator.clipboard.writeText(members.username)}
             >
               Copy username
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Remove</DropdownMenuItem>
-            <DropdownMenuItem>Assigne Task</DropdownMenuItem>
+            <Sheet>
+      <SheetTrigger asChild>
+      <p className=" hover:bg-gray-100 hover:cursor-default relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">Assign Task</p>
+      </SheetTrigger>
+      <SheetContent side='bottom' className="h-[300px] sm:h-[400px]">
+        <SheetHeader>
+          <SheetTitle>Edit profile</SheetTitle>
+          <SheetDescription>
+            Make changes to your profile here. Click save when you're done.
+          </SheetDescription>
+        </SheetHeader>
+
+
+        <div>
+          <AdderTask assignedId={members.id}/>
+        </div>
+
+        {/* <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Username
+            </Label>
+            <Input id="username" value="@peduarte" className="col-span-3" />
+          </div>
+        </div> */}
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button >Save changes</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
           </DropdownMenuContent>
         </DropdownMenu>
       )

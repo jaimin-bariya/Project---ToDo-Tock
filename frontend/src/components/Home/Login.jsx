@@ -1,14 +1,19 @@
 import { useState, useContext } from "react";
 import WelCome from "../../assets/icons/Home/welcome_back2.jpg"; // Replace with your login visual
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Conexts/Contexts"; 
+import { AuthContext, HomeContext } from "../../Conexts/Contexts"; 
+import { Home } from "lucide-react";
 
-const Login = ({ closeLoginModal, changeAuthOptions }) => {
+const Login = () => {
   const { login } = useContext(AuthContext);
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   
+
+
+  const {closeLoginModal, changeAuthOptions} = useContext(HomeContext)
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {

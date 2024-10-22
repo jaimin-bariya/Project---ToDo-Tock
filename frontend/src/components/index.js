@@ -5,6 +5,9 @@ export {default as Login} from './Home/Login'
 export {default as HomePage} from './Home/HomePage'
 export {default as Navbar} from './Home/Navbar'
 export {default as SignUp} from './Home/SignUp'
+export {default as Product} from './Home/Product'
+export {default as About} from './Home/About'
+export {default as Contact} from './Home/Contact'
 
 
 // Users

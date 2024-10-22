@@ -11,7 +11,9 @@ const TaskList = ({value}) => {
   const {userId} = useContext(AuthContext)
 
 
-  
+    console.log("haha", allTasks);
+    
+
 
 
   return (
@@ -19,7 +21,8 @@ const TaskList = ({value}) => {
 
       <div>
         {allTasks
-        .filter((task) => task.priority === parseInt(value))
+        
+        .filter((task) => task.priority === parseInt(value) && task.assignee_id === null )
         .map((task) => (
           <Task
             key={task.id}

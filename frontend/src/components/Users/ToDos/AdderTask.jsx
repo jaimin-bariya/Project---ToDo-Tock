@@ -20,17 +20,30 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { TaskContext, AuthContext } from '../../../Conexts/Contexts';
 
-const AdderTask = () => {
+const AdderTask = ({assignedId}) => {
   let [taskText, setTaskText] = useState("");
   const [priority, setPriority] = useState(0);
   const [date, setDate] = useState(new Date());
   const [isTypeProject, setIsTypeProject] = useState(false);
 
+  const [assignee_id, setAssignee_id] = useState(null)
+
   const { createNewToDo, setIsTaskUpdated } = useContext(TaskContext);
   const { userId } = useContext(AuthContext);
+
+
+  useEffect(() => {
+    if (assignedId) {
+      console.log(assignedId);
+      
+      setAssignee_id(assignedId)
+      setIsTypeProject(true)
+    }
+  
+  })
 
   const addTask = async () => {
 
@@ -49,13 +62,9 @@ const AdderTask = () => {
       taskText = 'untitled';
     }
 
-    console.log("while adding - ", priority);
-    
-    console.log("insdie adddtask", isoDate);
-    
 
     try {
-      const res = await createNewToDo(userId, taskText, isoDate, priority, isTypeProject);
+      const res = await createNewToDo(userId, taskText, isoDate, priority, isTypeProject, assignee_id);
       setIsTaskUpdated(prev => !prev);
 
       if (res) {

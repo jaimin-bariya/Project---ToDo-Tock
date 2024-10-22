@@ -2,10 +2,10 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import WelCome from "../../assets/icons/Home/sign.jpg"; // Replace with your signup visual
-import { AuthContext } from "../../Conexts/Contexts";
+import { AuthContext, HomeContext } from "../../Conexts/Contexts";
 
 
-const SignUp = ({ closeModal, changeAuthOptions }) => {
+const SignUp = () => {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,6 +13,11 @@ const SignUp = ({ closeModal, changeAuthOptions }) => {
   const [selectedGender, setSelectedGender] = useState("Select Gender");
   const [isDisable, setIsDisable] = useState(false);
   const [error, setError] = useState("");
+
+
+  
+  const {closeModal, changeAuthOptions} = useContext(HomeContext)
+
 
   const navigate = useNavigate();
 
