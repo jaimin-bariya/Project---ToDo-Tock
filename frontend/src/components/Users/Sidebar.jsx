@@ -98,7 +98,7 @@ const Sidebar = () => {
 
 
         {/* Goals  */}
-        <li>
+        {/* <li>
           <Link
             to={`/${userId}/goals`}
             className={`flex items-center p-2 rounded transition-colors duration-300 ${
@@ -107,11 +107,11 @@ const Sidebar = () => {
           >
             <FaDotCircle className="mr-2" /> <span>Goals</span>
           </Link>
-        </li>
+        </li> */}
 
 
         {/* Projects  */}
-        <li>
+        {/* <li>
           <Link
             to={`/${userId}/projects`}
             className={`flex items-center p-2 rounded transition-colors duration-300 ${
@@ -120,7 +120,7 @@ const Sidebar = () => {
           >
             <GrProjects className="mr-2" /> <span>Projects</span>
           </Link>
-        </li>
+        </li> */}
 
 
         {/* ToDos  */}
@@ -137,7 +137,7 @@ const Sidebar = () => {
 
 
         {/* Pomodoro  */}
-        <li>
+        {/* <li>
           <Link
             to={`/${userId}/pomodoro`}
             className={`flex items-center p-2 rounded transition-colors duration-300 ${
@@ -146,7 +146,7 @@ const Sidebar = () => {
           >
             <GiTomato className="mr-2" /> <span>Pomodoro</span>
           </Link>
-        </li>
+        </li> */}
 
         {/* Teams  */}
         <li>
@@ -161,7 +161,7 @@ const Sidebar = () => {
         </li>
 
         {/* More  */}
-        <li>
+        {/* <li>
           <Link
             to={`/${userId}/time-tracking`}
             className={`flex items-center p-2 rounded transition-colors duration-300 ${
@@ -170,7 +170,7 @@ const Sidebar = () => {
           >
             <FaClock className="mr-2" /> <span>Time Tracking</span>
           </Link>
-        </li>
+        </li> */}
 
       </ul>
 

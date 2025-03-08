@@ -38,10 +38,10 @@ function App() {
             {/* Default Home Page */}
             <Route path="/" element={<HomePage />} >
 
-            <Route path='' element={<Hero/>} />
-            <Route path='todotock/product' element={<Product />} />
-            <Route path='todotock/about' element={<About />} />
-            <Route path='todotock/contact' element={<Contact />} />
+              <Route path='' element={<Hero/>} />
+              <Route path='todotock/product' element={<Product />} />
+              <Route path='todotock/about' element={<About />} />
+              <Route path='todotock/contact' element={<Contact />} />
             </Route>
 
 

@@ -6,6 +6,9 @@ import jwt
 from datetime import datetime, timedelta, timezone
 
 
+import logging
+
+
 
 # Flask instance creation 
 app = Flask(__name__)
@@ -36,9 +39,7 @@ def create_token(user_id):
 
 
 
-from flask import request, jsonify
-import jwt
-import logging
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -75,9 +76,9 @@ with app.app_context():
     db.create_all()
 
 
+
+
+
 # for loading all routes
 from Tock import routes
-
-
-
 
